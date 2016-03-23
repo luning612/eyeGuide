@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\QQDownload\Android-SDK-master\Demos\build\intermediates\exploded-aar\com.android.volley\volley\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="350cebdede1c1c4379067a32d5008c2b13954439">
+        <dex dex="E:\QQDownload\Android-SDK-master\Demos\build\intermediates\pre-dexed\debug\classes-fa9f1c158fe4433378865a4b9bd14d06e59311ab.jar" />
+    </item>
+
+</items>
