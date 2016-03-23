@@ -62,7 +62,6 @@ public class LocationActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.location);
-    Toast.makeText(getApplicationContext(),"innnnnnnnnnnnnnnnnnnnnnnnnnnnnn", Toast.LENGTH_LONG).show();
     L.enableDebugLogging(true);
     locMgr = new LocationMgr();
     //nearable = getIntent().getExtras().getParcelable(ListNearablesActivity.EXTRAS_NEARABLE);
@@ -129,6 +128,7 @@ public class LocationActivity extends AppCompatActivity {
       if (null==currNearable || !currNearable.equals(beacon)) {
         currNearable = nearable;
         Toast.makeText(getApplicationContext(), nearable.identifier, Toast.LENGTH_LONG).show();
+        Log.w("ID", "nearable id " + nearable.identifier);
         Location loc = locMgr.getBeaconLocation(nearable.identifier);
         List<Location> nearbyLocs = locMgr.getNearbyLocations(loc);
 
@@ -147,7 +147,7 @@ public class LocationActivity extends AppCompatActivity {
       Eddystone eddystone = (Eddystone)beacon;
       if (null==currEddystone || !currEddystone.equals(beacon)) {
         currEddystone = eddystone;
-        String eddyStoneId = eddystone.macAddress.toString();
+        String eddyStoneId = eddystone.instance;
         Log.w("ID", "eddystone id " + eddyStoneId);
         Toast.makeText(getApplicationContext(),eddyStoneId , Toast.LENGTH_LONG).show();
         Location loc = locMgr.getBeaconLocation(eddyStoneId);
