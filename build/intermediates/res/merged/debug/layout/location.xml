@@ -4,11 +4,36 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/toolbar" android:id="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/locc"
+        android:textStyle="bold"
+        android:background="@android:color/black"
+        android:textSize="32sp"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:minHeight="100dp"
+        android:text="JKLJKFLdsfdsfs fhkdsjhfksk s fsd"
+        />
+    <TextView
+        android:id="@+id/rssic"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
-        >
+        android:background="#444444"
+        android:fillViewport="false">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,34 +41,12 @@
         android:orientation="vertical"
         >
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="In Location Layout"
-            android:textColor="@color/black"
-            />
-        <TextView
             android:id="@+id/macc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/black"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            />
-        <TextView
-            android:id="@+id/rssic"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:background="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:id="@+id/locc"
-            android:textStyle="bold"
-            android:background="@android:color/black"
-            android:textColor="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             />
         <TextView
             android:id="@+id/loctxtc"

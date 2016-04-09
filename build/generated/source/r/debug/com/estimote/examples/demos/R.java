@@ -1652,9 +1652,9 @@ containing a value of this type.
         public static final int line3=0x7f0b006d;
         public static final int listMode=0x7f0b0009;
         public static final int list_item=0x7f0b0028;
-        public static final int locc=0x7f0b005f;
+        public static final int locc=0x7f0b005d;
         public static final int loctxtc=0x7f0b0060;
-        public static final int macc=0x7f0b005d;
+        public static final int macc=0x7f0b005f;
         public static final int media_actions=0x7f0b0067;
         public static final int middle=0x7f0b001a;
         public static final int minor=0x7f0b0055;

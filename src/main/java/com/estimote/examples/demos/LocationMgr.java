@@ -17,7 +17,7 @@ public class LocationMgr {
     static String defaultFloor ="lvl 1";
     static double VERCINITY_THRESHOLD = 1.0;
     List<Location> locList;
-    Map<String, Integer> beaconMap = new HashMap<>();
+    public Map<String, Integer> beaconMap = new HashMap<>();
     public LocationMgr(){
         locList = Arrays.asList(
                 new Location(1, "Meeting room", "Meeting room is awesome",0,0),

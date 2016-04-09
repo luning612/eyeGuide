@@ -498,9 +498,9 @@ int id line1 0x7f0b0069
 int id line3 0x7f0b006d
 int id listMode 0x7f0b0009
 int id list_item 0x7f0b0028
-int id locc 0x7f0b005f
+int id locc 0x7f0b005d
 int id loctxtc 0x7f0b0060
-int id macc 0x7f0b005d
+int id macc 0x7f0b005f
 int id media_actions 0x7f0b0067
 int id middle 0x7f0b001a
 int id minor 0x7f0b0055
