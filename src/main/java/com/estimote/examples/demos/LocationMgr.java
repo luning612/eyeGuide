@@ -17,7 +17,7 @@ public class LocationMgr {
     static String defaultFloor ="lvl 1";
     static double VERCINITY_THRESHOLD = 1.0;
     List<Location> locList;
-    Map<String, Integer> beaconMap = new HashMap<>();
+    public Map<String, Integer> beaconMap = new HashMap<>();
     public LocationMgr(){
         locList = Arrays.asList(
                 new Location(1, "Meeting room", "Meeting room is awesome",0,0),
@@ -26,7 +26,7 @@ public class LocationMgr {
         );
         beaconMap.put("f59f5117fd5f", 1);
         beaconMap.put("15b4f0861909be11", 2);
-        //beaconMap.put("15b4f0861909be11", 3);
+        beaconMap.put("[F5:9F:51:17:FD:5F]", 3);//eddystone
     }
     public static String listToString(List<Location> nearbyLoc){
         StringBuilder sb = new StringBuilder();
