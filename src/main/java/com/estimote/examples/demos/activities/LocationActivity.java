@@ -48,7 +48,7 @@ public class LocationActivity extends Activity {
 
 
   private BeaconManager beaconManager;
-  private final String BACKEND_ENDPOINT = "http://symplcms.com:9001/api/object/create";
+  private final String BACKEND_ENDPOINT = "http://symplcms.com/api/object/create";
   private final String USER_ID = "111";
   private RequestQueue mRequestQueue;
   private LocationMgr locMgr;
