@@ -5,6 +5,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -18,34 +19,41 @@ public class Speaker implements OnInitListener {
         tts = new TextToSpeech(context, this);
     }
 
-    public boolean isAllowed(){
-        return allowed;
-    }
-    public void allow(boolean allowed){
-        this.allowed = allowed;
-    }
+//    public boolean isAllowed(){
+//        return allowed;
+//    }
+//    public void allow(boolean allowed){
+//        this.allowed = allowed;
+//    }
     @Override
     public void onInit(int status) {
         if(status == TextToSpeech.SUCCESS){
             // Change this to match your
             // locale
-            tts.setLanguage(Locale.US);
+//            tts.setLanguage(Locale.US);
             tts.setSpeechRate(DEFAULT_RATE);
             ready = true;
         }else{
+            Log.wtf("tts", "init failed!!!");
             ready = false;
         }
     }
-    public void speak(String text){
+    public void speak(String text, boolean toFlush){
 
         // Speak only if the TTS is ready
         // and the user has allowed speech
 
-        if(ready && allowed) {
+        if(ready) {
             HashMap<String, String> hash = new HashMap<String,String>();
             hash.put(TextToSpeech.Engine.KEY_PARAM_STREAM,
                     String.valueOf(AudioManager.STREAM_NOTIFICATION));
-            tts.speak(text, TextToSpeech.QUEUE_FLUSH, hash);
+            if(toFlush){
+                tts.speak(text, TextToSpeech.QUEUE_FLUSH, hash);
+            }else{
+                tts.speak(text, TextToSpeech.QUEUE_ADD, hash);
+            }
+        }else{
+            Log.wtf("tts", "not ready!!!");
         }
     }
 

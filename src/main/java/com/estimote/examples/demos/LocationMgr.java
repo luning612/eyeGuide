@@ -26,7 +26,7 @@ public class LocationMgr {
         );
         beaconMap.put("f59f5117fd5f", 1);
         beaconMap.put("15b4f0861909be11", 2);
-        //beaconMap.put("15b4f0861909be11", 3);
+        beaconMap.put("[F5:9F:51:17:FD:5F]", 3);//eddystone
     }
     public static String listToString(List<Location> nearbyLoc){
         StringBuilder sb = new StringBuilder();

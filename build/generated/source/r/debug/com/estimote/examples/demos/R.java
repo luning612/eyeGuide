@@ -1648,13 +1648,14 @@ containing a value of this type.
         public static final int ifRoom=0x7f0b001d;
         public static final int image=0x7f0b0026;
         public static final int info=0x7f0b006f;
+        public static final int ldistance=0x7f0b005e;
         public static final int line1=0x7f0b0069;
         public static final int line3=0x7f0b006d;
         public static final int listMode=0x7f0b0009;
         public static final int list_item=0x7f0b0028;
-        public static final int locc=0x7f0b005d;
-        public static final int loctxtc=0x7f0b0060;
-        public static final int macc=0x7f0b005f;
+        public static final int lloc=0x7f0b005d;
+        public static final int lloctxt=0x7f0b005f;
+        public static final int lnearbylocs=0x7f0b0060;
         public static final int media_actions=0x7f0b0067;
         public static final int middle=0x7f0b001a;
         public static final int minor=0x7f0b0055;
@@ -1671,7 +1672,6 @@ containing a value of this type.
         public static final int radio=0x7f0b003b;
         public static final int refresh=0x7f0b0074;
         public static final int root=0x7f0b0057;
-        public static final int rssic=0x7f0b005e;
         public static final int screen=0x7f0b0014;
         public static final int scrollIndicatorDown=0x7f0b0035;
         public static final int scrollIndicatorUp=0x7f0b0032;
