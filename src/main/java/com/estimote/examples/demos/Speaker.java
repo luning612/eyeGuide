@@ -33,11 +33,11 @@ public class Speaker implements OnInitListener {
         if(status == TextToSpeech.SUCCESS){
             // Change this to match your
             // locale
-//            tts.setLanguage(Locale.US);
+            tts.setLanguage(Locale.US);
             tts.setSpeechRate(DEFAULT_RATE);
             ready = true;
         }else{
-            Toast.makeText(this, "Sorry! Text To Speech failed...",Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Sorry! Text To Speech failed...",Toast.LENGTH_LONG).show();
             ready = false;
         }
     }
@@ -56,7 +56,14 @@ public class Speaker implements OnInitListener {
                 tts.speak(text, TextToSpeech.QUEUE_ADD, hash);
             }
         }else{
-            Log.e("tts", "not ready!!!");
+            //try {
+                //Thread.sleep(1000);
+                //speak(text, toFlush);
+                Log.e("tts", "not ready!!!");
+                Toast.makeText(context, "Waiting for Text To Speech service",Toast.LENGTH_LONG).show();
+            //} catch (InterruptedException e) {
+            //    e.printStackTrace();
+            //}
         }
     }
 
