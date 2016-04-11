@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\QQDownload\Android-SDK-master\Demos\src\androidTest\res"/><source path="E:\QQDownload\Android-SDK-master\Demos\build\generated\res\rs\androidTest\debug"/><source path="E:\QQDownload\Android-SDK-master\Demos\build\generated\res\resValues\androidTest\debug"/></dataSet><mergedItems/></merger>
+<merger version="3"><dataSet config="main"><source path="D:\SMU\Year_3_Sem_2\IoT\Project\eyeGuide\src\androidTest\res"/><source path="D:\SMU\Year_3_Sem_2\IoT\Project\eyeGuide\build\generated\res\rs\androidTest\debug"/><source path="D:\SMU\Year_3_Sem_2\IoT\Project\eyeGuide\build\generated\res\resValues\androidTest\debug"/></dataSet><mergedItems/></merger>
