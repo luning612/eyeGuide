@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -15,7 +16,9 @@ public class Speaker implements OnInitListener {
     private TextToSpeech tts;
     private boolean ready = false;
     private boolean allowed = true;
+    private Context context;
     public Speaker(Context context){
+        this.context = context;
         tts = new TextToSpeech(context, this);
     }
 
@@ -34,7 +37,7 @@ public class Speaker implements OnInitListener {
             tts.setSpeechRate(DEFAULT_RATE);
             ready = true;
         }else{
-            Log.wtf("tts", "init failed!!!");
+            Toast.makeText(this, "Sorry! Text To Speech failed...",Toast.LENGTH_LONG).show();
             ready = false;
         }
     }
@@ -53,7 +56,7 @@ public class Speaker implements OnInitListener {
                 tts.speak(text, TextToSpeech.QUEUE_ADD, hash);
             }
         }else{
-            Log.wtf("tts", "not ready!!!");
+            Log.e("tts", "not ready!!!");
         }
     }
 
