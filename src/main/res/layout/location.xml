@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <include layout="@layout/toolbar" android:id="@+id/toolbar" />
+    android:id="@+id/lloc"
+    <!--<include layout="@layout/toolbar" android:id="@+id/toolbar" />-->
 
     <TextView
         android:id="@+id/lloc"
@@ -20,6 +20,18 @@
         android:text="JKLJKFLdsfdsfs fhkdsjhfksk s fsd"
         />
     <TextView
+        android:id="@+id/llevel"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_height="30dp"
+        android:text="level"
+        />
+    <TextView
         android:id="@+id/ldistance"
         android:textStyle="bold"
         android:textColor="@android:color/white"
@@ -28,7 +40,7 @@
         android:textAlignment="center"
         android:gravity="center"
         android:textSize="24sp"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
         android:text="JKLJKFLdsfdsfs "
         />
 
@@ -60,7 +72,7 @@
             android:id="@+id/lnearbylocs"
             android:textColor="@android:color/white"
             android:background="#363636"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"

@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Speaker implements OnInitListener {
     private final float DEFAULT_RATE = 1.0f;
@@ -31,17 +33,15 @@ public class Speaker implements OnInitListener {
     @Override
     public void onInit(int status) {
         if(status == TextToSpeech.SUCCESS){
-            // Change this to match your
-            // locale
             tts.setLanguage(Locale.US);
             tts.setSpeechRate(DEFAULT_RATE);
             ready = true;
         }else{
-            Toast.makeText(context, "Sorry! Text To Speech failed...",Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Oops...Text To Speech failed...",Toast.LENGTH_LONG).show();
             ready = false;
         }
     }
-    public void speak(String text, boolean toFlush){
+    public void speak(String text, final boolean toFlush){
 
         // Speak only if the TTS is ready
         // and the user has allowed speech
@@ -56,14 +56,10 @@ public class Speaker implements OnInitListener {
                 tts.speak(text, TextToSpeech.QUEUE_ADD, hash);
             }
         }else{
-            //try {
-                //Thread.sleep(1000);
-                //speak(text, toFlush);
-                Log.e("tts", "not ready!!!");
-                Toast.makeText(context, "Waiting for Text To Speech service",Toast.LENGTH_LONG).show();
-            //} catch (InterruptedException e) {
-            //    e.printStackTrace();
-            //}
+            Log.e("tts", "not ready!!!");
+            TimerTask tryAgainTask = new SpeakerTimerTask(text,toFlush );
+            Toast.makeText(context, "Waiting for Text To Speech service. Try again in a sec",Toast.LENGTH_SHORT).show();
+            new Timer().schedule(tryAgainTask, 2000);
         }
     }
 
@@ -74,5 +70,15 @@ public class Speaker implements OnInitListener {
     // Free up resources
     public void destroy(){
         tts.shutdown();
+    }
+    class SpeakerTimerTask extends TimerTask{
+        String text;boolean toFlush;
+        SpeakerTimerTask(String text, boolean toFlush){
+            this.text = text; this.toFlush = toFlush;
+        }
+        @Override
+        public void run() {
+            speak(text, toFlush);
+        }
     }
 }

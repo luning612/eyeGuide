@@ -16,17 +16,24 @@ public class LocationMgr {
     boolean dstIsSet = false;
     static String defaultFloor ="lvl 1";
     static double VERCINITY_THRESHOLD = 1.0;
+    public static final int NEARER = 1;
+    public static final int FARTHER = 2;
+    public static final int NEITHER = 0;
+    public static final int REACHED = -1;
+
     List<Location> locList;
     public Map<String, Integer> beaconMap = new HashMap<>();
     public LocationMgr(){
         locList = Arrays.asList(
                 new Location(1, "Meeting room", "Meeting room is awesome",0,0),
                 new Location(2, "Dining room", "Dining room is neat",1,0),
-                new Location(3, "Toilet", "Toilet is clean",0,1)
+                new Location(3, "Toilet", "Toilet is clean",0,2),
+                new Location(4, "Sitting area", "There are VH accessible benches.",1,2)
         );
         beaconMap.put("f59f5117fd5f", 1);
         beaconMap.put("15b4f0861909be11", 2);
         beaconMap.put("[F5:9F:51:17:FD:5F]", 3);//eddystone
+        beaconMap.put("[E9:65:4A:DB:91:32]", 4);//eddystone
     }
     public static String listToString(List<Location> nearbyLoc){
         StringBuilder sb = new StringBuilder();
@@ -35,14 +42,23 @@ public class LocationMgr {
         }
         return sb.toString();
     }
+    public static int movementAgainstDest(Location loc1, Location loc2, Location dest){
+        double dist1d = euclideanDistance(loc1, dest);
+        double dist2d = euclideanDistance(loc2, dest);
+        if (dist1d< dist2d) return FARTHER;
+        else if (dist1d< dist2d) return NEARER;
+        else return NEITHER;
+    }
     public List<Location> getNearbyLocations(Location origin){
         List<Location> nearbyList = new ArrayList<>();
         for (Location loc: locList){
-            if (euclideanDistance(loc, origin)<=VERCINITY_THRESHOLD) nearbyList.add(loc);
+            if (loc.getId()!= origin.getId() && euclideanDistance(loc, origin)<=VERCINITY_THRESHOLD) {
+                nearbyList.add(loc);
+            }
         }
         return nearbyList;
     }
-    private double euclideanDistance(Location loc1, Location loc2){
+    private static double euclideanDistance(Location loc1, Location loc2){
         return Math.sqrt(Math.pow((loc1.getX() - loc2.getX()),2) + Math.pow((loc1.getY() - loc2.getY()),2));
     }
     public Location getBeaconLocation(String mac){

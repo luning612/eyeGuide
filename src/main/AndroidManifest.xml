@@ -23,8 +23,9 @@
 
   <application
       android:name=".DemosApplication"
-      android:label="Estimote Demos"
-      android:theme="@style/EstimoteTheme">
+      android:label="eyeGuide"
+      android:theme="@style/EstimoteTheme"
+      android:icon="@drawable/beacon_gray">
 
     <activity
         android:name=".activities.AllDemosActivity"
