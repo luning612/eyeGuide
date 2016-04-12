@@ -32,7 +32,9 @@ import org.json.JSONObject;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -48,7 +50,8 @@ public class LocationActivity extends Activity {
 
 
   private BeaconManager beaconManager;
-  private final String BACKEND_ENDPOINT = "http://symplcms.com/api/object/create";
+  //private final String BACKEND_ENDPOINT = "http://symplcms.com:9001/api/object/create";
+  private final String BACKEND_ENDPOINT = "https://burning-torch-746.firebaseio.com/1.json";
   private final String USER_ID = "111";
   private RequestQueue mRequestQueue;
   private LocationMgr locMgr;
@@ -59,7 +62,8 @@ public class LocationActivity extends Activity {
   private final int CHECK_CODE = 0x1;
   private final int LONG_DURATION = 5000;
   private final int SHORT_DURATION = 1200;
-
+  private int noNearableCounter = 0;
+  private final int OUT_OF_RANGE_THRESHOLD = 10;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -74,22 +78,22 @@ public class LocationActivity extends Activity {
     speaker = new Speaker(this);
     //beacon = getIntent().getParcelableExtra(ListBeaconsActivity.EXTRAS_BEACON);
     final Object[] availableNearables = locMgr.beaconMap.keySet().toArray();
-    final String[] availableDistances = {"IMMEDIATE","10meter"};
-    //for simulation
-    new Timer().schedule(new TimerTask() {
-      @Override
-      public void run() {
-        runOnUiThread(new Runnable() {
-          @Override
-          public void run() {
-            int rnd = new Random().nextInt(availableNearables.length);
-            String pickedId = (String) availableNearables[rnd];
-            int rnd2 = new Random().nextInt(availableDistances.length);
-            processNearable(availableDistances[rnd2],pickedId);
-          }
-        });
-      }
-    }, new Date(),2000);
+//    final String[] availableDistances = {"IMMEDIATE","10meter"};
+//    //for simulation
+//    new Timer().schedule(new TimerTask() {
+//      @Override
+//      public void run() {
+//        runOnUiThread(new Runnable() {
+//          @Override
+//          public void run() {
+//            int rnd = new Random().nextInt(availableNearables.length);
+//            String pickedId = (String) availableNearables[rnd];
+//            int rnd2 = new Random().nextInt(availableDistances.length);
+//            processNearable(availableDistances[rnd2],pickedId);
+//          }
+//        });
+//      }
+//    }, new Date(),2000);
 
   }
 
@@ -120,7 +124,7 @@ public class LocationActivity extends Activity {
           Log.i("prep", "nearable: " + id+ " "+distance);
           processNearable(distance, id);
         } else {
-          //processNoNearable();
+          processNoNearable();
         }
       }
     });
@@ -135,15 +139,15 @@ public class LocationActivity extends Activity {
 
           processNearable(distance, id);
         } else {
-          //processNoNearable();
+          processNoNearable();
         }
       }
     });
     beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
       @Override
       public void onServiceReady() {
-//        beaconManager.startNearableDiscovery();
-//        beaconManager.startEddystoneScanning();
+        beaconManager.startNearableDiscovery();
+        beaconManager.startEddystoneScanning();
       }
     });
   }
@@ -204,6 +208,13 @@ public class LocationActivity extends Activity {
     }
   }
   private void processNoNearable(){
+    noNearableCounter +=1;
+    if(noNearableCounter>=OUT_OF_RANGE_THRESHOLD){
+      displayNoNearable();
+      noNearableCounter =0;
+    }
+  }
+  private void displayNoNearable(){
     sendToBackend("NULL");
     ((TextView) findViewById(R.id.ldistance)).setText("Distance: - ");
     ((TextView) findViewById(R.id.lloc)).setText("Location: - " );
@@ -230,18 +241,27 @@ public class LocationActivity extends Activity {
     speaker.speak(String.format("You are %s to %s.", distance, loc), true);
   }
   private void sendToBackend(String locSlug) {
-    Log.d("send to backend", locSlug);
+//    String jsonTemplateStr = "{\"country\": \"Singapore\", \"region\": \"\", \"city\": \"Singapore\",\n" +
+//            "\"userId\": 50, \"objectTypeId\": 341, \"appId\": 186, \"properties\": [\n" +
+//            "{ \"location_id\": \"1\" },{\"user_id\": \"2\" },\n" +
+//            "{ \"timestamp\": \"05-04-2016 12:00\" }" +
+//            "] }";
     String jsonTemplateStr = "{\"country\": \"Singapore\", \"region\": \"\", \"city\": \"Singapore\",\n" +
             "\"userId\": 50, \"objectTypeId\": 341, \"appId\": 186, \"properties\": [\n" +
             "{ \"location_id\": \"1\" },{\"user_id\": \"2\" },\n" +
             "{ \"timestamp\": \"05-04-2016 12:00\" }" +
             "] }";
-    try {
-      JSONObject json = new JSONObject(jsonTemplateStr)
-              .put("user_id",USER_ID)
-              .put("location_id",locSlug)
-              .put("timestamp", System.currentTimeMillis() / 1000);
+    Map<String, String> jsonMap = new HashMap<>();
+    jsonMap.put("location_id", locSlug);
+    jsonMap.put("user_id",USER_ID );
+    jsonMap.put("timestamp", (System.currentTimeMillis() / 1000)+"");
 
+    //try {
+//      JSONObject json = new JSONObject(jsonTemplateStr)
+//              .put("user_id",USER_ID)
+//              .put("location_id",locSlug)
+//              .put("timestamp", System.currentTimeMillis() / 1000);
+      JSONObject json = new JSONObject(jsonMap);
       // Request a string response from the provided URL.
       Log.d("send to backend", json.toString());
       JsonObjectRequest request = new JsonObjectRequest(
@@ -259,6 +279,6 @@ public class LocationActivity extends Activity {
               });
       // Add the request to the RequestQueue.
       mRequestQueue.add(request);
-    } catch (JSONException e) { e.printStackTrace(); }
+    //} catch (JSONException e) { e.printStackTrace(); }
   }
 }

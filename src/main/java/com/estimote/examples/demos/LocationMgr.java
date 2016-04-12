@@ -31,7 +31,7 @@ public class LocationMgr {
     public static String listToString(List<Location> nearbyLoc){
         StringBuilder sb = new StringBuilder();
         for (Location loc: nearbyLoc){
-            sb.append(loc);
+            sb.append(loc.getName()+"\n");
         }
         return sb.toString();
     }
