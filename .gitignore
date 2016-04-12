@@ -6,4 +6,6 @@ gradle
 volley
 gradle
 local.properties
-eyeGuide.iml
+*.iml
+*.ipr
+*.iws
